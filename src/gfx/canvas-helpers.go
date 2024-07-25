@@ -31,3 +31,44 @@ func (canvas *Canvas) DrawBox(startX, startY, endX, endY int, c color.Color) err
 
 	return nil
 }
+
+func (canvas *Canvas) DrawLine(startX, startY, endX, endY int, c color.Color) error {
+	// Flip the order if necessary
+	if startX > endX {
+		startX, endX = endX, startX
+	}
+	if startY > endY {
+		startY, endY = endY, startY
+	}
+
+	// Make sure the line is within bounds
+	if startX < 0 || endX >= WindowWidth || startY < 0 || endY >= WindowHeight {
+		return fmt.Errorf("line %d:%d - %d:%d is out of bounds", startX, startY, endX, endY)
+	}
+
+	// Figure out how many pixels we need to set
+	xDistance := endX - startX
+	xStepSize := 1.0
+	yDistance := endY - startY
+	yStepSize := 1.0
+
+	// Figure out how far we need to move between each pixel
+	var pixelCount int
+	if xDistance > yDistance {
+		pixelCount = xDistance
+		yStepSize = float64(yDistance) / float64(pixelCount)
+	} else {
+		pixelCount = yDistance
+		xStepSize = float64(xDistance) / float64(pixelCount)
+	}
+
+	// Set all the pixels
+	for i := 0; i < pixelCount; i++ {
+		err := canvas.DrawPixel(startX+int(float64(i)*xStepSize), startY+int(float64(i)*yStepSize), c)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
