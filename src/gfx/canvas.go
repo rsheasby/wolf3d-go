@@ -10,6 +10,7 @@ import (
 	"image/color"
 
 	"gioui.org/app"
+	"gioui.org/f32"
 	"gioui.org/op"
 	"gioui.org/op/paint"
 )
@@ -59,6 +60,7 @@ func (canvas *Canvas) render() error {
 		case app.DestroyEvent:
 			return e.Err
 		case app.FrameEvent:
+			gtx := app.NewContext(&ops, e)
 			e.Source.Execute(op.InvalidateCmd{})
 			// Reset the operations back to zero.
 			ops.Reset()
@@ -67,6 +69,8 @@ func (canvas *Canvas) render() error {
 			canvas.Lock()
 			imageOp := paint.NewImageOp(canvas.activeFrame)
 			canvas.Unlock()
+			imageOp.Filter = paint.FilterNearest
+			op.Affine(f32.Affine2D{}.Scale(f32.Pt(0, 0), f32.Pt(gtx.Metric.PxPerDp, gtx.Metric.PxPerDp))).Add(&ops)
 			imageOp.Add(&ops)
 
 			paint.PaintOp{}.Add(&ops)
