@@ -20,7 +20,7 @@ func (canvas *Canvas) DrawBox(startX, startY, endX, endY int, c color.Color) err
 	}
 
 	// Set the pixels
-	for x := startX; x <= endX; x++ {
+	for x := startX; x < endX; x++ {
 		for y := startY; y < endY; y++ {
 			err := canvas.DrawPixel(x, y, c)
 			if err != nil {
