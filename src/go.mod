@@ -9,6 +9,7 @@ require (
 
 require (
 	dmitri.shuralyov.com/gpu/mtl v0.0.0-20221208032759-85de2813cf6b // indirect
+	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20231223183121-56fa3ac82ce7 // indirect
 	github.com/go-text/typesetting v0.1.1 // indirect
 	github.com/jezek/xgb v1.1.1 // indirect

@@ -50,3 +50,11 @@ func ReadMap(filename string) Map {
 
 	return gameMap
 }
+
+func (m *Map) Dimensions() (width, height int) {
+	height = len(*m)
+	if height > 0 {
+		width = len((*m)[0])
+	}
+	return width, height
+}

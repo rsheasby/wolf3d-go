@@ -132,7 +132,7 @@ func (canvas *Canvas) paint() {
 	canvas.Lock()
 	defer canvas.Unlock()
 
-	log.Println("Painting...")
+	// log.Println("Painting...")
 	canvas.texture.Upload(image.Point{0, 0}, canvas.buffer, canvas.buffer.Bounds())
 	canvas.window.Scale(image.Rect(0, 0, canvas.windowWidth, canvas.windowHeight), canvas.texture, canvas.texture.Bounds(), screen.Over, nil)
 	canvas.window.Publish()
