@@ -15,7 +15,7 @@ func (canvas *Canvas) DrawBox(startX, startY, endX, endY int, c color.Color) err
 	}
 
 	// Make sure the box is within bounds
-	if startX < 0 || endX >= CanvasWidth || startY < 0 || endY >= CanvasHeight {
+	if startX < 0 || endX > CanvasWidth || startY < 0 || endY > CanvasHeight {
 		return fmt.Errorf("box %d:%d - %d:%d is out of bounds", startX, startY, endX, endY)
 	}
 
