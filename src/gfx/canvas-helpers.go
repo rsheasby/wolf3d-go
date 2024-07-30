@@ -33,14 +33,6 @@ func (canvas *Canvas) DrawBox(startX, startY, endX, endY int, c color.Color) err
 }
 
 func (canvas *Canvas) DrawLine(startX, startY, endX, endY int, c color.Color) error {
-	// Flip the order if necessary
-	if startX > endX {
-		startX, endX = endX, startX
-	}
-	if startY > endY {
-		startY, endY = endY, startY
-	}
-
 	// Make sure the line is within bounds
 	if startX < 0 || endX >= CanvasWidth || startY < 0 || endY >= CanvasHeight {
 		return fmt.Errorf("line %d:%d - %d:%d is out of bounds", startX, startY, endX, endY)

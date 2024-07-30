@@ -85,7 +85,7 @@ func (canvas *Canvas) Start() {
 			case size.Event:
 				canvas.handleResize(e)
 			case key.Event:
-				// canvas.keyEvents <- e
+				canvas.keyEvents <- e
 			case mouse.Event:
 				// canvas.mouseEvents <- e
 			case error:
