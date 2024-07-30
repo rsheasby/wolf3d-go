@@ -3,13 +3,16 @@ package main
 import (
 	"image/color"
 
-	"gioui.org/app"
 	"github.com/rsheasby/wolf3d-go/gfx"
 )
 
 func main() {
 	canvas := gfx.NewCanvas()
-	canvas.DrawBox(100, 100, 200, 200, color.NRGBA{255, 0, 0, 255})
-	canvas.PushFrame()
-	app.Main()
+	go func() {
+		canvas.DrawBox(0, 0, 639, 479, color.RGBA{255, 255, 255, 255})
+		canvas.DrawLine(0, 0, 639, 479, color.RGBA{255, 0, 0, 255})
+		canvas.PushFrame()
+		canvas.PushFrame()
+	}()
+	canvas.Start()
 }
